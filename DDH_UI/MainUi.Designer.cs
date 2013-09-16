@@ -85,7 +85,7 @@
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn.Width = 200;
+            this.nameDataGridViewTextBoxColumn.Width = 230;
             // 
             // fullNameDataGridViewTextBoxColumn
             // 
@@ -98,7 +98,7 @@
             // displaySizeDataGridViewTextBoxColumn
             // 
             this.displaySizeDataGridViewTextBoxColumn.DataPropertyName = "DisplaySize";
-            this.displaySizeDataGridViewTextBoxColumn.HeaderText = "DisplaySize";
+            this.displaySizeDataGridViewTextBoxColumn.HeaderText = "Size";
             this.displaySizeDataGridViewTextBoxColumn.Name = "displaySizeDataGridViewTextBoxColumn";
             this.displaySizeDataGridViewTextBoxColumn.ReadOnly = true;
             // 

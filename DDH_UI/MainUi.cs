@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -17,9 +18,10 @@ namespace DDH_UI
         public MainUi() {
             InitializeComponent();
 
-            PopulateDirectory(@"D:\Downloads\");
+            string dirPath = ConfigurationManager.AppSettings["DownloadsDirectory"];
+            PopulateDirectory(dirPath);
         }
-
+        
         private void PopulateDirectory(string directoryPathToScan) {
             var fsDataItems = new List<FileSystemItem>();
 

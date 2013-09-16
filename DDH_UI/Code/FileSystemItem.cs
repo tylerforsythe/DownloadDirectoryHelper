@@ -39,11 +39,11 @@ namespace DDH_UI.Code
         public DateTime LastWriteTime { get; set; }
         public bool IsFolder { get; set; }
 
-        public long? DisplaySize {
+        public string DisplaySize {
             get {
                 if (Size.HasValue)
-                    return Size.Value;
-                return null;
+                    return (Size.Value / 1024).ToString() + " KB";
+                return "";
             }
         }
 
