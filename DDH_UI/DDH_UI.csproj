@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\FileSystemItem.cs" />
+    <Compile Include="Code\ShowSelectedInExplorer.cs" />
     <Compile Include="DirectoryTree.cs">
       <SubType>Component</SubType>
     </Compile>

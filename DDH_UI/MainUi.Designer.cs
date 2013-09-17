@@ -36,7 +36,11 @@
             this.btnFilter = new System.Windows.Forms.Button();
             this.txtFindAsYouType = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.gridRightClickContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showInWindowsExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileSystemItemsCollectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.isFolderDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ItemGuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fullNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.displaySizeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,8 +49,8 @@
             this.lastAccessTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastWriteTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fileSystemTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fileSystemItemsCollectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgFiles)).BeginInit();
+            this.gridRightClickContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemItemsCollectionBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,6 +64,7 @@
             this.dgFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.isFolderDataGridViewCheckBoxColumn,
+            this.ItemGuid,
             this.nameDataGridViewTextBoxColumn,
             this.fullNameDataGridViewTextBoxColumn,
             this.displaySizeDataGridViewTextBoxColumn,
@@ -68,6 +73,7 @@
             this.lastAccessTimeDataGridViewTextBoxColumn,
             this.lastWriteTimeDataGridViewTextBoxColumn,
             this.fileSystemTypeDataGridViewTextBoxColumn});
+            this.dgFiles.ContextMenuStrip = this.gridRightClickContextMenu;
             this.dgFiles.DataSource = this.fileSystemItemsCollectionBindingSource;
             this.dgFiles.Location = new System.Drawing.Point(12, 40);
             this.dgFiles.Name = "dgFiles";
@@ -75,6 +81,7 @@
             this.dgFiles.RowHeadersVisible = false;
             this.dgFiles.Size = new System.Drawing.Size(920, 572);
             this.dgFiles.TabIndex = 0;
+            this.dgFiles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFiles_CellContentClick);
             // 
             // label1
             // 
@@ -155,6 +162,24 @@
             this.label5.TabIndex = 7;
             this.label5.Text = "Find as you type:";
             // 
+            // gridRightClickContextMenu
+            // 
+            this.gridRightClickContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showInWindowsExplorerToolStripMenuItem});
+            this.gridRightClickContextMenu.Name = "contextMenuStrip1";
+            this.gridRightClickContextMenu.Size = new System.Drawing.Size(214, 26);
+            // 
+            // showInWindowsExplorerToolStripMenuItem
+            // 
+            this.showInWindowsExplorerToolStripMenuItem.Name = "showInWindowsExplorerToolStripMenuItem";
+            this.showInWindowsExplorerToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.showInWindowsExplorerToolStripMenuItem.Text = "Show in Windows Explorer";
+            this.showInWindowsExplorerToolStripMenuItem.Click += new System.EventHandler(this.showInWindowsExplorerToolStripMenuItem_Click);
+            // 
+            // fileSystemItemsCollectionBindingSource
+            // 
+            this.fileSystemItemsCollectionBindingSource.DataSource = typeof(DDH_UI.Code.FileSystemItemsCollection);
+            // 
             // isFolderDataGridViewCheckBoxColumn
             // 
             this.isFolderDataGridViewCheckBoxColumn.DataPropertyName = "IsFolder";
@@ -162,6 +187,14 @@
             this.isFolderDataGridViewCheckBoxColumn.Name = "isFolderDataGridViewCheckBoxColumn";
             this.isFolderDataGridViewCheckBoxColumn.ReadOnly = true;
             this.isFolderDataGridViewCheckBoxColumn.Width = 50;
+            // 
+            // ItemGuid
+            // 
+            this.ItemGuid.DataPropertyName = "ItemGuid";
+            this.ItemGuid.HeaderText = "Guid";
+            this.ItemGuid.Name = "ItemGuid";
+            this.ItemGuid.ReadOnly = true;
+            this.ItemGuid.Visible = false;
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -225,10 +258,6 @@
             this.fileSystemTypeDataGridViewTextBoxColumn.Name = "fileSystemTypeDataGridViewTextBoxColumn";
             this.fileSystemTypeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // fileSystemItemsCollectionBindingSource
-            // 
-            this.fileSystemItemsCollectionBindingSource.DataSource = typeof(DDH_UI.Code.FileSystemItemsCollection);
-            // 
             // MainUi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -247,6 +276,7 @@
             this.Name = "MainUi";
             this.Text = "Download Directory Helper";
             ((System.ComponentModel.ISupportInitialize)(this.dgFiles)).EndInit();
+            this.gridRightClickContextMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemItemsCollectionBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -257,15 +287,6 @@
 
         private System.Windows.Forms.DataGridView dgFiles;
         private System.Windows.Forms.BindingSource fileSystemItemsCollectionBindingSource;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isFolderDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fullNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn displaySizeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sizeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn creationTimeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lastAccessTimeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lastWriteTimeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fileSystemTypeDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCreatedNDaysAgo;
         private System.Windows.Forms.Label label2;
@@ -275,6 +296,18 @@
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.TextBox txtFindAsYouType;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ContextMenuStrip gridRightClickContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem showInWindowsExplorerToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isFolderDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemGuid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fullNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn displaySizeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sizeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn creationTimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastAccessTimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastWriteTimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fileSystemTypeDataGridViewTextBoxColumn;
     }
 }
 

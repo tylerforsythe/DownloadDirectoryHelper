@@ -87,5 +87,17 @@ namespace DDH_UI
 
             dgFiles.DataSource = query.ToList();
         }
+
+        private void dgFiles_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+            dgFiles.Rows[e.RowIndex].Selected = true;
+        }
+
+        private void showInWindowsExplorerToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (dgFiles.SelectedRows.Count == 0)
+                return;
+            var selectedRowKey = dgFiles.SelectedRows[0].Cells["ItemGuid"].Value;
+            var fileItem = _originalListing.SingleOrDefault(x => x.ItemGuid.ToString() == (string)selectedRowKey);
+            ShowSelectedInExplorer.FileOrFolder(fileItem.FullName);
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace DDH_UI.Code
             LastAccessTime = file.LastAccessTime;
             LastWriteTime = file.LastWriteTime;
             IsFolder = false;
+            _guid = Guid.NewGuid();
         }
 
         public FileSystemItem(DirectoryInfo folder) {
@@ -29,6 +30,7 @@ namespace DDH_UI.Code
             LastAccessTime = folder.LastAccessTime;
             LastWriteTime = folder.LastWriteTime;
             IsFolder = true;
+            _guid = Guid.NewGuid();
         }
 
         public string Name { get; set; }
@@ -38,6 +40,11 @@ namespace DDH_UI.Code
         public DateTime LastAccessTime { get; set; }
         public DateTime LastWriteTime { get; set; }
         public bool IsFolder { get; set; }
+
+        private Guid _guid;
+        public string ItemGuid {
+            get { return _guid.ToString(); }
+        }
 
         public string DisplaySize {
             get {
