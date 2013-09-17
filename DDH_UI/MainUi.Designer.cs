@@ -39,6 +39,7 @@
             this.gridRightClickContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showInWindowsExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileSystemItemsCollectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.IconImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.isFolderDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ItemGuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,6 +64,7 @@
             this.dgFiles.AutoGenerateColumns = false;
             this.dgFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IconImage,
             this.isFolderDataGridViewCheckBoxColumn,
             this.ItemGuid,
             this.nameDataGridViewTextBoxColumn,
@@ -179,6 +181,14 @@
             // fileSystemItemsCollectionBindingSource
             // 
             this.fileSystemItemsCollectionBindingSource.DataSource = typeof(DDH_UI.Code.FileSystemItemsCollection);
+            // 
+            // IconImage
+            // 
+            this.IconImage.DataPropertyName = "IconImage";
+            this.IconImage.HeaderText = "Icon";
+            this.IconImage.Name = "IconImage";
+            this.IconImage.ReadOnly = true;
+            this.IconImage.Width = 30;
             // 
             // isFolderDataGridViewCheckBoxColumn
             // 
@@ -298,6 +308,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ContextMenuStrip gridRightClickContextMenu;
         private System.Windows.Forms.ToolStripMenuItem showInWindowsExplorerToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewImageColumn IconImage;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isFolderDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ItemGuid;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;

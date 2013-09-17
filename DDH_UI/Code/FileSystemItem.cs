@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 
 namespace DDH_UI.Code
@@ -40,6 +41,15 @@ namespace DDH_UI.Code
         public DateTime LastAccessTime { get; set; }
         public DateTime LastWriteTime { get; set; }
         public bool IsFolder { get; set; }
+
+        public byte[] IconImage {
+            get {
+                var icon = GetIcon();
+                if (icon != null)
+                    return IconToBytes(icon);
+                return null;
+            }
+        }
 
         private Guid _guid;
         public string ItemGuid {
@@ -93,6 +103,21 @@ namespace DDH_UI.Code
 
             // If we reach here, no match
             return false;
+        }
+
+        private Icon GetIcon() {
+            try {
+                return Icon.ExtractAssociatedIcon(FullName);
+            }
+            catch {
+                return null;
+            }
+        }
+        public static byte[] IconToBytes(Icon icon) {
+            using (var ms = new MemoryStream()) {
+                icon.Save(ms);
+                return ms.ToArray();
+            }
         }
     }
 }
