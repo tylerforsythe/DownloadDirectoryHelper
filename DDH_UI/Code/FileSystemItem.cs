@@ -43,7 +43,7 @@ namespace DDH_UI.Code
             get {
                 if (Size.HasValue)
                     return (Size.Value / 1024).ToString() + " KB";
-                return "";
+                return "--";
             }
         }
 

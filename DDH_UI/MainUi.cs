@@ -15,10 +15,20 @@ namespace DDH_UI
 {
     public partial class MainUi : Form
     {
+        private List<FileSystemItem> _originalListing;
+
         public MainUi() {
             InitializeComponent();
 
             string dirPath = ConfigurationManager.AppSettings["DownloadsDirectory"];
+
+#if DEBUG
+            if (Environment.MachineName.ToUpper().Contains("BLACKBELT"))
+                dirPath = @"C:\home\Downloads";
+            if (Environment.MachineName.ToUpper().Contains("ORGRIMMAR"))
+                dirPath = @"D:\Downloads";
+#endif
+
             PopulateDirectory(dirPath);
         }
         
@@ -41,6 +51,7 @@ namespace DDH_UI
                 fsDataItems.Add(new FileSystemItem(file));
 
             dgFiles.DataSource = fsDataItems;
+            _originalListing = fsDataItems;
         }
 
         public void ShowCustomTree() {
@@ -53,6 +64,28 @@ namespace DDH_UI
 
         private void fileSystemItemBindingSource_CurrentChanged(object sender, EventArgs e) {
 
+        }
+
+        private void txtFindAsYouType_TextChanged(object sender, EventArgs e) {
+            if (txtFindAsYouType.Text.Length == 0)
+                dgFiles.DataSource = _originalListing;
+            else {
+                dgFiles.DataSource = _originalListing.Where(f => f.Name.ToLower().Contains(txtFindAsYouType.Text.ToLower())).ToList();
+            }
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e) {
+            var query = _originalListing.AsQueryable();
+
+            int largerThanSize = 0;
+            if (int.TryParse(txtLargerThan.Text, out largerThanSize))
+                query = query.Where(x => (x.Size / 1000 / 1000) > largerThanSize);
+
+            int olderThanDays = 0;
+            if (int.TryParse(txtCreatedNDaysAgo.Text, out olderThanDays))
+                query = query.Where(x => (DateTime.Now - x.CreationTime).Days >= olderThanDays);
+
+            dgFiles.DataSource = query.ToList();
         }
     }
 }
