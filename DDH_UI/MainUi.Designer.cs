@@ -27,6 +27,10 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.dgFiles = new System.Windows.Forms.DataGridView();
+            this.IconImage = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ItemGuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gridRightClickContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showInWindowsExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCreatedNDaysAgo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,12 +40,7 @@
             this.btnFilter = new System.Windows.Forms.Button();
             this.txtFindAsYouType = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.gridRightClickContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.showInWindowsExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileSystemItemsCollectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.IconImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.isFolderDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ItemGuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fullNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.displaySizeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,6 +49,8 @@
             this.lastAccessTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastWriteTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fileSystemTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fileSystemItemsCollectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgFiles)).BeginInit();
             this.gridRightClickContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemItemsCollectionBindingSource)).BeginInit();
@@ -84,6 +85,36 @@
             this.dgFiles.Size = new System.Drawing.Size(920, 572);
             this.dgFiles.TabIndex = 0;
             this.dgFiles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFiles_CellContentClick);
+            // 
+            // IconImage
+            // 
+            this.IconImage.DataPropertyName = "IconImage";
+            this.IconImage.HeaderText = "Icon";
+            this.IconImage.Name = "IconImage";
+            this.IconImage.ReadOnly = true;
+            this.IconImage.Width = 30;
+            // 
+            // ItemGuid
+            // 
+            this.ItemGuid.DataPropertyName = "ItemGuid";
+            this.ItemGuid.HeaderText = "Guid";
+            this.ItemGuid.Name = "ItemGuid";
+            this.ItemGuid.ReadOnly = true;
+            this.ItemGuid.Visible = false;
+            // 
+            // gridRightClickContextMenu
+            // 
+            this.gridRightClickContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showInWindowsExplorerToolStripMenuItem});
+            this.gridRightClickContextMenu.Name = "contextMenuStrip1";
+            this.gridRightClickContextMenu.Size = new System.Drawing.Size(214, 26);
+            // 
+            // showInWindowsExplorerToolStripMenuItem
+            // 
+            this.showInWindowsExplorerToolStripMenuItem.Name = "showInWindowsExplorerToolStripMenuItem";
+            this.showInWindowsExplorerToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.showInWindowsExplorerToolStripMenuItem.Text = "Show in Windows Explorer";
+            this.showInWindowsExplorerToolStripMenuItem.Click += new System.EventHandler(this.showInWindowsExplorerToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -139,7 +170,7 @@
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(857, 14);
+            this.btnFilter.Location = new System.Drawing.Point(776, 14);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(75, 23);
             this.btnFilter.TabIndex = 2;
@@ -164,32 +195,6 @@
             this.label5.TabIndex = 7;
             this.label5.Text = "Find as you type:";
             // 
-            // gridRightClickContextMenu
-            // 
-            this.gridRightClickContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showInWindowsExplorerToolStripMenuItem});
-            this.gridRightClickContextMenu.Name = "contextMenuStrip1";
-            this.gridRightClickContextMenu.Size = new System.Drawing.Size(214, 26);
-            // 
-            // showInWindowsExplorerToolStripMenuItem
-            // 
-            this.showInWindowsExplorerToolStripMenuItem.Name = "showInWindowsExplorerToolStripMenuItem";
-            this.showInWindowsExplorerToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.showInWindowsExplorerToolStripMenuItem.Text = "Show in Windows Explorer";
-            this.showInWindowsExplorerToolStripMenuItem.Click += new System.EventHandler(this.showInWindowsExplorerToolStripMenuItem_Click);
-            // 
-            // fileSystemItemsCollectionBindingSource
-            // 
-            this.fileSystemItemsCollectionBindingSource.DataSource = typeof(DDH_UI.Code.FileSystemItemsCollection);
-            // 
-            // IconImage
-            // 
-            this.IconImage.DataPropertyName = "IconImage";
-            this.IconImage.HeaderText = "Icon";
-            this.IconImage.Name = "IconImage";
-            this.IconImage.ReadOnly = true;
-            this.IconImage.Width = 30;
-            // 
             // isFolderDataGridViewCheckBoxColumn
             // 
             this.isFolderDataGridViewCheckBoxColumn.DataPropertyName = "IsFolder";
@@ -197,14 +202,6 @@
             this.isFolderDataGridViewCheckBoxColumn.Name = "isFolderDataGridViewCheckBoxColumn";
             this.isFolderDataGridViewCheckBoxColumn.ReadOnly = true;
             this.isFolderDataGridViewCheckBoxColumn.Width = 50;
-            // 
-            // ItemGuid
-            // 
-            this.ItemGuid.DataPropertyName = "ItemGuid";
-            this.ItemGuid.HeaderText = "Guid";
-            this.ItemGuid.Name = "ItemGuid";
-            this.ItemGuid.ReadOnly = true;
-            this.ItemGuid.Visible = false;
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -268,11 +265,26 @@
             this.fileSystemTypeDataGridViewTextBoxColumn.Name = "fileSystemTypeDataGridViewTextBoxColumn";
             this.fileSystemTypeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // fileSystemItemsCollectionBindingSource
+            // 
+            this.fileSystemItemsCollectionBindingSource.DataSource = typeof(DDH_UI.Code.FileSystemItemsCollection);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(857, 14);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 8;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // MainUi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 650);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtFindAsYouType);
             this.Controls.Add(this.btnFilter);
@@ -319,6 +331,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn lastAccessTimeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastWriteTimeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fileSystemTypeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 

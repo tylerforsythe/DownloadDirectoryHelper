@@ -99,5 +99,9 @@ namespace DDH_UI
             var fileItem = _originalListing.SingleOrDefault(x => x.ItemGuid.ToString() == (string)selectedRowKey);
             ShowSelectedInExplorer.FileOrFolder(fileItem.FullName);
         }
+
+        private void btnClear_Click(object sender, EventArgs e) {
+            dgFiles.DataSource = _originalListing;
+        }
     }
 }
